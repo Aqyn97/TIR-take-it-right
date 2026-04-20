@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: tir-backend
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tir_db
+    username: ${DB_USERNAME:tir_user}
+    password: ${DB_PASSWORD:tir_password}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: 8080
