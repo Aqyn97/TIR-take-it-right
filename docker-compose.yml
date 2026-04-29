@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: tir-postgres
+    environment:
+      POSTGRES_DB: ${DB_NAME:-tir}
+      POSTGRES_USER: ${DB_USER:-tir}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-tir_dev_pwd}
+    ports:
+      - "5433:5432"
+    volumes:
+      - tir_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-tir}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  tir_pg_data:
